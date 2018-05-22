@@ -34,29 +34,29 @@ func podSpecFields(isUpdatable bool) map[string]*schema.Schema {
 			Description: "If specified, the pod's scheduling constraints",
 			Elem: &schema.Resource{
 				Schema: map[string]*schema.Schema{
-					"podAffinity": {
+					"pod_affinity": {
 						Type:        schema.TypeMap,
 						Optional:    true,
 						Description: "Describes pod affinity scheduling rules (e.g. co-locate this pod in the same node, zone, etc. as some other pod(s)).",
 						Elem: &schema.Resource{
 							Schema: map[string]*schema.Schema{
-								"preferredDuringSchedulingIgnoredDuringExecution": {
+								"preferred_during_scheduling_ignored_during_execution": {
 									Type:        schema.TypeList,
 									Optional:    true,
 									Description: "The scheduler will prefer to schedule pods to nodes that satisfy the affinity expressions specified by this field, but it may choose a node that violates one or more of the expressions. The node that is most preferred is the one with the greatest sum of weights, i.e. for each node that meets all of the scheduling requirements (resource request, requiredDuringScheduling affinity expressions, etc.), compute a sum by iterating through the elements of this field and adding \"weight\" to the sum if the node has pods which matches the corresponding podAffinityTerm; the node(s) with the highest sum are the most preferred.",
 									Elem: &schema.Resource{
 										Schema: map[string]*schema.Schema{
-											"labelSelector": {
+											"label_selector": {
 												Type:        schema.TypeString,
 												Description: "A label query over a set of resources, in this case pods.",
 												Required:    true,
 											},
 											"namespaces": {
 												Type:        schema.TypeList,
-												Description: "This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching the labelSelector in the specified namespaces, where co-located is defined as running on a node whose value of the label with key topologyKey matches that of any node on which any of the selected pods is running. Empty topologyKey is not allowed.",
+												Description: "namespaces specifies which namespaces the labelSelector applies to (matches against); null or empty list means \"this pod's namespace\"",
 												Optional:    true,
 											},
-											"topologyKey": {
+											"topology_key": {
 												Type:        schema.TypeString,
 												Description: "This pod should be co-located (affinity) or not co-located (anti-affinity) with the pods matching the labelSelector in the specified namespaces, where co-located is defined as running on a node whose value of the label with key topologyKey matches that of any node on which any of the selected pods is running. Empty topologyKey is not allowed.",
 												Required:    true,
